@@ -80,7 +80,7 @@ f <- system.file("extdata", "2024", "RAIS_VINC_PUB_NORDESTE_sample.7z", package 
 rais_read(f, uf = "PE")
 ```
 
-## How the server is organised
+## How the server is organized
 
     ftp://ftp.mtps.gov.br/pdet/microdados/RAIS/
         1985/ ... 2017/      one file per state (PE2017.7z, SP2017.7z, ...) + ESTB2017.7z

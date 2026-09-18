@@ -44,7 +44,7 @@ a persistent cache is strongly recommended.
 
 ``` r
 rais_cache_dir()
-#> [1] "/tmp/Rtmp3ANxsQ/raisr-cache"
+#> [1] "/tmp/RtmppzTkOk/raisr-cache"
 if (FALSE) { # \dontrun{
 # Persistent cache for every session:
 Sys.setenv(RAISR_CACHE_DIR = "~/dados/rais")
