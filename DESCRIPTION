@@ -1,0 +1,55 @@
+Package: raisr
+Title: Access 'RAIS' Microdata from the Brazilian Ministry of Labour
+Version: 0.1.0
+Authors@R: c(
+    person("Andre", "Leite", email = "leite@castlab.org", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-4718-9766")),
+    person("Marcos", "Wasiliew", email = "marcos.wasiliew@sepe.pe.gov.br", role = "aut"),
+    person("Hugo", "Vasconcelos", email = "hugo.vasconcelos@ufpe.br", role = "aut",
+           comment = c(ORCID = "0000-0001-6249-0920")),
+    person("Carlos", "Amorim", email = "carlos.agaf@ufpe.br", role = "aut",
+           comment = c(ORCID = "0000-0001-6315-8305")),
+    person("Diogo", "Bezerra", email = "diogo.bezerra@ufpe.br", role = "aut",
+           comment = c(ORCID = "0000-0002-1216-8674")),
+    person("Júlia", "Nascimento Barreto",
+           email = "juliabarreto@gd.seplag.pe.gov.br", role = "aut"))
+Description: Download and read the public, non-identified microdata of the
+    'RAIS' (Relação Anual de Informações Sociais), the annual census of
+    formal employment relationships and establishments published by the
+    Brazilian Ministry of Labour and Employment through the 'PDET' FTP
+    server <ftp://ftp.mtps.gov.br/pdet/microdados/RAIS/>. Lists the years and
+    archives available on the server, resolves which regional or state
+    archive holds a given state, downloads it with an idempotent local cache,
+    and reads the '7z' archives as a stream, filtering by state and selecting
+    columns before anything is kept in memory, so that a single state can be
+    extracted from a regional file of tens of millions of records. Handles
+    the two header generations of the files (up to the 'RAIS' 2022 and from
+    the 'RAIS' 2023 onwards) with the same normalized column names, provides
+    the official record layout and a helper to consolidate the employment
+    stock, admissions, separations and December payroll.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Language: en-US
+Depends: R (>= 4.1.0)
+Roxygen: list(markdown = TRUE)
+Imports:
+    archive (>= 1.1.0),
+    cli (>= 3.6.0),
+    curl (>= 5.0.0),
+    readr (>= 2.1.0),
+    rlang (>= 1.1.0),
+    stringi (>= 1.7.0),
+    tibble (>= 3.2.0)
+Suggests:
+    dplyr,
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0),
+    withr
+SystemRequirements: libarchive (via the 'archive' package)
+Config/testthat/edition: 3
+VignetteBuilder: knitr
+URL: https://github.com/StrategicProjects/raisr,
+    https://strategicprojects.github.io/raisr/
+BugReports: https://github.com/StrategicProjects/raisr/issues
+Config/roxygen2/version: 8.0.0

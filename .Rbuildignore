@@ -1,0 +1,17 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^LICENSE\.md$
+^README\.Rmd$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^\.github$
+^\.DS_Store$
+^data-raw$
+^\.positai$
+^\.claude$
+^CLAUDE\.md$
+^doc$
+^Meta$
+^cran-comments\.md$
+^CRAN-SUBMISSION$

@@ -1,0 +1,139 @@
+---
+title: "Streaming, cache and file generations"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Streaming, cache and file generations}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r}
+library(raisr)
+```
+
+## How an archive is read
+
+Each `.7z` archive holds a single text file: Latin-1, one header line, one
+record per line. Extracted, a regional file is several gigabytes of text
+(the establishments file of 2023 alone is 1.3 GB), and a naive
+`read.csv()` on it needs many times that in memory.
+
+`rais_read()` never extracts the archive. It opens a read connection on the
+compressed entry through `archive::archive_read()`, so `libarchive`
+decompresses on the fly, and hands that connection to
+`readr::read_delim_chunked()`. Every chunk (500,000 lines by default) goes
+through a callback that:
+
+1. keeps only the records whose municipality code starts with one of the
+   requested states (`uf`);
+2. keeps only the requested `columns`.
+
+Only what survives the callback is accumulated. Everything is read as
+character first, and typed once at the end (wages as doubles, integer codes
+as integers, the Ministry's ignored marker as `NA`), because the two file
+generations write numbers differently.
+
+The chunk size is a memory/speed trade-off: 500,000 lines of 60 short
+columns is a few hundred megabytes at peak. Lower it on a small machine;
+the result is the same:
+
+```{r}
+f <- system.file("extdata", "2022", "RAIS_VINC_PUB_NORDESTE_sample.7z", package = "raisr")
+a <- rais_read(f, chunk_size = 5L, verbose = FALSE)
+b <- rais_read(f, chunk_size = 100000L, verbose = FALSE)
+identical(a, b)
+```
+
+## Two header generations
+
+Up to the RAIS 2022 (and in the partial and legacy editions) the files are
+`;`-separated with decimal comma, padded fields and headers such as
+`Vínculo Ativo 31/12`; the ignored marker is `{ñ class}`. From the RAIS
+2023 onwards the files are `,`-separated with quoted strings, decimal point
+and headers such as `Ind Vínculo Ativo 31/12 - Código`, and two columns
+were added (`ind_vinculo_abandonado`, `categoria_trabalhador`).
+
+`rais_read()` detects the generation from the header line and maps both to
+the same normalized names, so different years stack directly:
+
+```{r}
+new <- rais_read(system.file("extdata", "2024", "RAIS_VINC_PUB_NORDESTE_sample.7z", package = "raisr"),
+                 columns = c("municipio", "vinculo_ativo_31_12", "vl_remun_media_nom"), verbose = FALSE)
+old <- rais_read(f, columns = c("municipio", "vinculo_ativo_31_12", "vl_remun_media_nom"), verbose = FALSE)
+rais_stock(rbind(new, old))
+```
+
+`rais_layout()` lists the two spellings of every column:
+
+```{r}
+subset(rais_layout(), original != original_2023)[, c("column", "original", "original_2023")]
+```
+
+Before 2018 the files are per state and shorter: the monthly wage columns
+exist from 2015 (named `vl_rem_<mes>_cc` up to 2017, `vl_rem_<mes>_sc`
+after), and the oldest years use other classifications
+(`cbo_ocupacao`, `grau_instrucao_2005_1985`). Columns absent from a year
+come back as `NA` when years are stacked with `rais_fetch()`.
+
+## The cache
+
+`rais_download()` stores every archive under `rais_cache_dir()`, mirroring
+the server: one sub-folder per year and edition, the server's file name
+inside.
+
+```
+<cache>/2024/RAIS_VINC_PUB_NORDESTE.7z
+<cache>/2024/RAIS_ESTAB_PUB.7z
+<cache>/2023-legado/RAIS_VINC_PUB_NORDESTE.7z
+<cache>/2017/PE2017.7z
+```
+
+A file already in the cache is not downloaded again (`status = "cached"`)
+unless `force = TRUE`. This is what lets you call `rais_fetch()` for the
+same years repeatedly, with different states or columns, and pay for the
+download only once. `rais_read()` takes the reference year from that folder
+name (or from the file name of pre-2018 files); pass `year` explicitly for
+an archive kept elsewhere.
+
+The cache location is resolved from the `cache_dir` argument, the
+`RAISR_CACHE_DIR` environment variable, the `raisr.cache_dir` option, or a
+folder under `tempdir()` (the CRAN-compliant default, wiped with the R
+session). A persistent cache is strongly recommended: a regional file is
+hundreds of megabytes and the Ministry's server is slow.
+
+```{r, eval = FALSE}
+Sys.setenv(RAISR_CACHE_DIR = "~/dados/rais")
+rais_cache_list()
+rais_cache_clear(2019)      # drop one year
+```
+
+## Editions: final, partial and legacy
+
+Some years are published first as a preliminary edition, in a folder
+`<year> Parcial`, and when a year is re-published the previous files are
+kept in a `Legado` sub-folder. `rais_available()` reports them with
+`edition = "parcial"` and `"legado"`, and `rais_download()`, `rais_fetch()`
+and `rais_files()` accept `edition` to fetch them; they are cached under
+`<year>-parcial` and `<year>-legado`. The default, `"final"`, is the current
+official file of the year.
+
+```{r}
+rais_files(2023, uf = "PE", edition = "legado")$url
+```
+
+## Network
+
+The server is a plain FTP server. Outbound access on port 21 **and** on the
+high ports used by passive mode is required; corporate firewalls often
+block one or both. When the server cannot be reached `rais_available()`
+returns an empty tibble with a warning, and `rais_download()` reports
+`status = "error"` after three attempts, without raising, so that a long
+loop over years can continue and be inspected afterwards through the
+`"download"` attribute of `rais_fetch()`.
