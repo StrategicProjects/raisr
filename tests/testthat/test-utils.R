@@ -24,7 +24,7 @@ test_that("years and states are validated", {
   expect_error(raisr:::.as_uf(99), "Unknown")
 })
 
-test_that("archives are recognised from their names and folders", {
+test_that("archives are recognized from their names and folders", {
   d <- raisr:::.detect_file("2024/RAIS_VINC_PUB_NORDESTE.7z")
   expect_equal(d$type, "vinculos"); expect_equal(d$group, "NORDESTE"); expect_true(is.na(d$year))
   d <- raisr:::.detect_file("x/RAIS_VINC_PUB_NORDESTE_sample.7z")

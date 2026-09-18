@@ -35,9 +35,9 @@ rais_layout <- function(type = "vinculos") {
 .rais_layout_vinculos <- function() {
   tibble::tribble(
     ~column,                   ~original,                  ~original_2023,                                      ~type,       ~description,
-    "bairros_sp",              "Bairros SP",               "Bairros SP - C\u00f3digo",                          "integer",   "Neighbourhood code, municipality of Sao Paulo only.",
-    "bairros_fortaleza",       "Bairros Fortaleza",        "Bairros Fortaleza - C\u00f3digo",                   "integer",   "Neighbourhood code, municipality of Fortaleza only.",
-    "bairros_rj",              "Bairros RJ",               "Bairros RJ - C\u00f3digo",                          "integer",   "Neighbourhood code, municipality of Rio de Janeiro only.",
+    "bairros_sp",              "Bairros SP",               "Bairros SP - C\u00f3digo",                          "integer",   "Neighborhood code, municipality of Sao Paulo only.",
+    "bairros_fortaleza",       "Bairros Fortaleza",        "Bairros Fortaleza - C\u00f3digo",                   "integer",   "Neighborhood code, municipality of Fortaleza only.",
+    "bairros_rj",              "Bairros RJ",               "Bairros RJ - C\u00f3digo",                          "integer",   "Neighborhood code, municipality of Rio de Janeiro only.",
     "causa_afastamento_1",     "Causa Afastamento 1",      "Causa Afastamento 1 - C\u00f3digo",                 "integer",   "Cause of the first leave of absence in the year (99 none).",
     "causa_afastamento_2",     "Causa Afastamento 2",      "Causa Afastamento 2 - C\u00f3digo",                 "integer",   "Cause of the second leave of absence in the year.",
     "causa_afastamento_3",     "Causa Afastamento 3",      "Causa Afastamento 3 - C\u00f3digo",                 "integer",   "Cause of the third leave of absence in the year.",
@@ -65,7 +65,7 @@ rais_layout <- function(type = "vinculos") {
     "natureza_juridica",       "Natureza Jur\u00eddica",   "Natureza Jur\u00eddica - C\u00f3digo",              "integer",   "Legal nature of the employer (CONCLA, four digits).",
     "ind_portador_defic",      "Ind Portador Defic",       "Ind Portador Defic - C\u00f3digo",                  "integer",   "Worker with a disability (0 no, 1 yes).",
     "qtd_dias_afastamento",    "Qtd Dias Afastamento",     "Qtd Dias Afastamento",                              "integer",   "Total days of leave in the year.",
-    "raca_cor",                "Ra\u00e7a Cor",            "Ra\u00e7a Cor - C\u00f3digo",                       "integer",   "Race/colour (1 indigenous, 2 white, 4 black, 6 yellow, 8 brown, 9 not identified).",
+    "raca_cor",                "Ra\u00e7a Cor",            "Ra\u00e7a Cor - C\u00f3digo",                       "integer",   "Race/color (1 indigenous, 2 white, 4 black, 6 yellow, 8 brown, 9 not identified).",
     "regioes_adm_df",          "Regi\u00f5es Adm DF",      "Regi\u00e3o Adm DF - C\u00f3digo",                  "integer",   "Administrative region, Federal District only.",
     "vl_remun_dezembro_nom",   "Vl Remun Dezembro Nom",    "Vl Rem Dezembro Nom",                               "double",    "December wage, nominal BRL.",
     "vl_remun_dezembro_sm",    "Vl Remun Dezembro (SM)",   "Vl Rem Dezembro (SM)",                              "double",    "December wage in minimum wages.",
@@ -103,9 +103,9 @@ rais_layout <- function(type = "vinculos") {
 .rais_layout_estabelecimentos <- function() {
   tibble::tribble(
     ~column,                     ~original,                    ~original_2023,                              ~type,       ~description,
-    "bairros_sp",                "Bairros SP",                 "Bairros SP - C\u00f3digo",                  "integer",   "Neighbourhood code, municipality of Sao Paulo only.",
-    "bairros_fortaleza",         "Bairros Fortaleza",          "Bairros Fortaleza - C\u00f3digo",           "integer",   "Neighbourhood code, municipality of Fortaleza only.",
-    "bairros_rj",                "Bairros RJ",                 "Bairros RJ - C\u00f3digo",                  "integer",   "Neighbourhood code, municipality of Rio de Janeiro only.",
+    "bairros_sp",                "Bairros SP",                 "Bairros SP - C\u00f3digo",                  "integer",   "Neighborhood code, municipality of Sao Paulo only.",
+    "bairros_fortaleza",         "Bairros Fortaleza",          "Bairros Fortaleza - C\u00f3digo",           "integer",   "Neighborhood code, municipality of Fortaleza only.",
+    "bairros_rj",                "Bairros RJ",                 "Bairros RJ - C\u00f3digo",                  "integer",   "Neighborhood code, municipality of Rio de Janeiro only.",
     "cnae_20_classe",            "CNAE 2.0 Classe",            "CNAE 2.0 Classe - C\u00f3digo",             "character", "CNAE 2.0 class (five digits, with leading zeros; the 2023 files carry the seven-digit subclass here).",
     "cnae_95_classe",            "CNAE 95 Classe",             "CNAE 95 Classe - C\u00f3digo",              "character", "CNAE 1.0/95 class.",
     "distritos_sp",              "Distritos SP",               "Distritos SP - C\u00f3digo",                "integer",   "District code, municipality of Sao Paulo only.",

@@ -15,7 +15,7 @@ test_that("stock, admissions, separations and December payroll are aggregated", 
   expect_equal(s$mean_december_wage, s$december_payroll / sum(paid))
 })
 
-test_that("extra grouping columns are honoured and years stack", {
+test_that("extra grouping columns are honored and years stack", {
   a <- rais_read(sample("2024", "RAIS_VINC_PUB_NORDESTE_sample.7z"), verbose = FALSE)
   b <- rais_read(sample("2022", "RAIS_VINC_PUB_NORDESTE_sample.7z"), verbose = FALSE)
   both <- raisr:::.bind_rows_fill(list(a, b))
