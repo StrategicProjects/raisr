@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 316 366" width="316" height="366">
+  <defs>
+    <clipPath id="hex">
+      <polygon points="158,4 312,92 312,272 158,360 4,272 4,92"/>
+    </clipPath>
+    <linearGradient id="bg" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0%" stop-color="#1f4e79"/>
+      <stop offset="100%" stop-color="#0b2540"/>
+    </linearGradient>
+  </defs>
+  <g clip-path="url(#hex)">
+    <rect x="0" y="0" width="316" height="366" fill="url(#bg)"/>
+    <!-- annual stock of employment relationships: one bar per year, stacked
+         by the two regimes (CLT and statutory), with the 31/12 baseline -->
+    <line x1="60" y1="196" x2="256" y2="196" stroke="#9fc5e8" stroke-width="3" stroke-linecap="round"/>
+    <g fill="#5cc8a8">
+      <rect x="72"  y="118" width="22" height="78" rx="3"/>
+      <rect x="112" y="104" width="22" height="92" rx="3"/>
+      <rect x="152" y="124" width="22" height="72" rx="3"/>
+      <rect x="192" y="90"  width="22" height="106" rx="3"/>
+      <rect x="232" y="76"  width="22" height="120" rx="3"/>
+    </g>
+    <g fill="#f28f3b">
+      <rect x="72"  y="92"  width="22" height="24" rx="3"/>
+      <rect x="112" y="76"  width="22" height="26" rx="3"/>
+      <rect x="152" y="100" width="22" height="22" rx="3"/>
+      <rect x="192" y="62"  width="22" height="26" rx="3"/>
+      <rect x="232" y="46"  width="22" height="28" rx="3"/>
+    </g>
+    <!-- mean wage line -->
+    <polyline points="83,150 123,134 163,146 203,118 243,100" fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+    <g fill="#ffffff">
+      <circle cx="83" cy="150" r="5"/><circle cx="123" cy="134" r="5"/><circle cx="163" cy="146" r="5"/>
+      <circle cx="203" cy="118" r="5"/><circle cx="243" cy="100" r="5"/>
+    </g>
+  </g>
+  <polygon points="158,4 312,92 312,272 158,360 4,272 4,92" fill="none" stroke="#0b2540" stroke-width="6"/>
+  <text x="158" y="268" text-anchor="middle" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="58" font-weight="700" fill="#ffffff" letter-spacing="1">raisr</text>
+  <text x="158" y="294" text-anchor="middle" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="12" fill="#9fc5e8" letter-spacing="1.5">RAIS · MTE</text>
+</svg>
