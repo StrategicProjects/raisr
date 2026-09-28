@@ -36,7 +36,8 @@ Authors:
 - Andre Leite <leite@castlab.org>
   ([ORCID](https://orcid.org/0000-0002-4718-9766))
 
-- Marcos Wasiliew <marcos.wasiliew@sepe.pe.gov.br>
+- Marcos Wasiliew <marcos.wasiliew@gmail.com>
+  ([ORCID](https://orcid.org/0009-0004-4694-3159))
 
 - Hugo Vasconcelos <hugo.vasconcelos@ufpe.br>
   ([ORCID](https://orcid.org/0000-0001-6249-0920))
@@ -48,3 +49,4 @@ Authors:
   ([ORCID](https://orcid.org/0000-0002-1216-8674))
 
 - Júlia Nascimento Barreto <juliabarreto@gd.seplag.pe.gov.br>
+  ([ORCID](https://orcid.org/0009-0004-2851-7770))
