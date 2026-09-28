@@ -4,7 +4,8 @@ Version: 0.1.0
 Authors@R: c(
     person("Andre", "Leite", email = "leite@castlab.org", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-4718-9766")),
-    person("Marcos", "Wasiliew", email = "marcos.wasiliew@sepe.pe.gov.br", role = "aut"),
+    person("Marcos", "Wasiliew", email = "marcos.wasiliew@gmail.com", role = "aut",
+           comment = c(ORCID = "0009-0004-4694-3159")),
     person("Hugo", "Vasconcelos", email = "hugo.vasconcelos@ufpe.br", role = "aut",
            comment = c(ORCID = "0000-0001-6249-0920")),
     person("Carlos", "Amorim", email = "carlos.agaf@ufpe.br", role = "aut",
@@ -12,7 +13,8 @@ Authors@R: c(
     person("Diogo", "Bezerra", email = "diogo.bezerra@ufpe.br", role = "aut",
            comment = c(ORCID = "0000-0002-1216-8674")),
     person("Júlia", "Nascimento Barreto",
-           email = "juliabarreto@gd.seplag.pe.gov.br", role = "aut"))
+           email = "juliabarreto@gd.seplag.pe.gov.br", role = "aut",
+           comment = c(ORCID = "0009-0004-2851-7770")))
 Description: Download and read the public, non-identified microdata of the
     'RAIS' (Relação Anual de Informações Sociais), the annual census of
     formal employment relationships and establishments published by the
